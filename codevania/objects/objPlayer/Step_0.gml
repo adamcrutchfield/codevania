@@ -1,0 +1,14 @@
+/// @description
+
+var left = keyboard_check(ord("A"));
+var right = keyboard_check(ord("D"));
+var jump = keyboard_check_pressed(vk_space);
+
+switch state {
+	case playerStates.idle:
+		moveAndCollide(left, right, jump);
+		break;
+	default: break;
+}
+
+if (y > room_height + 100) room_restart();
