@@ -1,10 +1,10 @@
 /// @description
 
-state = playerStates.idle;
+state = golemStates.empty;
 
 moveSpeed = 60;
-jumpStrength = 920;
-grav = 60;
+jumpStrength = 780;
+grav = 40;
 
 frictFloor = 0.65;
 frictAir = 0.95;

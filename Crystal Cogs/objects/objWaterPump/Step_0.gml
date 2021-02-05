@@ -8,7 +8,7 @@ event_inherited();
 active = (arrLight[lightColors.blue] >= 2 and position_meeting(x, y, objMineralSpring));
 if (active) {
 	for (var i = 1; i < NUM_COLORS; i++) {
-		active = (arrLight[i] == 0);
+		if (i != lightColors.blue) active = (arrLight[i] == 0);
 	}
 }
 

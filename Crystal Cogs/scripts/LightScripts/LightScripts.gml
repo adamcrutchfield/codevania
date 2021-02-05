@@ -270,11 +270,11 @@ function setLaserColorAndAlpha(_laser) {
 	
 	var alpha = min(brightestColorAmount, brightnessCeiling) / brightnessCeiling;
 	
+	//draw_text(_laser.startX, _laser.startY, string(_laser.arrLight) + " " + string(alpha));
+	//draw_text(_laser.startX, _laser.startY + 16, string(redBrightness) + " " + string(greenBrightness) + " " + string(blueBrightness));
+	
 	draw_set_color(make_color_rgb(redBrightness, greenBrightness, blueBrightness));
 	draw_set_alpha(alpha);
-	
-	//draw_text(_laser.startX, _laser.startY, string(_laser.arrLight) + " " + string(draw_get_alpha()));
-	//draw_text(_laser.startX, _laser.startY + 16, string(redBrightness) + " " + string(greenBrightness) + " " + string(blueBrightness));
 }
 
 function drawLightColor(color) {

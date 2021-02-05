@@ -1,11 +1,5 @@
 /// @description moveAndCollide()
-function moveAndCollide(left, right, jump) {
-	var walkDirection = right - left;
-	
-	hAcceleration = walkDirection * moveSpeed;
-	vAcceleration = grav;
-	
-	if (jump and place_meeting(x, y + 1, objSolid)) vAcceleration -= jumpStrength;
+function moveAndCollide() {
 		
 	hSpeed += hAcceleration * global.secondsPassed;
 	vSpeed += vAcceleration * global.secondsPassed;

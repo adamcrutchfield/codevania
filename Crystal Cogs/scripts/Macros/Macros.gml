@@ -20,6 +20,13 @@ enum laserDirections {
 	rightDown
 }
 
-enum playerStates {
-	idle
+enum soulStates {
+	free,
+	movingToGolem,
+	inGolem
+}
+
+enum golemStates {
+	empty,
+	hasSoul
 }

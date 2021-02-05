@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprWaterPump",
-    "path": "sprites/sprWaterPump/sprWaterPump.yy",
+    "name": "sprTank",
+    "path": "sprites/sprTank/sprTank.yy",
   },
   "solid": false,
   "visible": true,

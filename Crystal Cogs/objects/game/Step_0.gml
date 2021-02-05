@@ -65,7 +65,7 @@ for (var i = 0; i <= 9; i++) {
 		if (!onMachine and i < array_length(arrMachinesGUI)) {
 			instance_create_layer(gridTargetX, gridTargetY, "Machines", arrMachinesGUI[i]);
 		} else {
-			if ( onMachine and machineTouching.object_index == objRefractor and i < 7) {
+			if ( onMachine and machineTouching.object_index == objRefractor and i < NUM_COLORS) {
 				//change color of refractor
 				with machineTouching color = i;
 			}
