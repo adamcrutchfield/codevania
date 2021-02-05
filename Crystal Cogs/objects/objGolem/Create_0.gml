@@ -1,4 +1,4 @@
-/// @description
+/// @description init vars
 
 state = golemStates.empty;
 

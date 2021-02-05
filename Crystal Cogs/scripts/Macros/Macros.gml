@@ -23,7 +23,8 @@ enum laserDirections {
 enum soulStates {
 	free,
 	movingToGolem,
-	inGolem
+	inGolem,
+	exitingGolem
 }
 
 enum golemStates {

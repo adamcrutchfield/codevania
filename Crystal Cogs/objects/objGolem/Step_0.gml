@@ -1,4 +1,4 @@
-/// @description
+/// @description when occupied, move
 
 var left = keyboard_check(ord("A"));
 var right = keyboard_check(ord("D"));
@@ -27,8 +27,8 @@ switch state {
 		while (objSoul.bbox_left <= bbox_left) objSoul.x++;
 		while (objSoul.bbox_right >= bbox_right) objSoul.x--;
 		
+		if (y > room_height + 100) instance_destroy();
+		
 		break;
 	default: break;
 }
-
-if (y > room_height + 100) room_restart();
