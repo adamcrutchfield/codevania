@@ -142,10 +142,11 @@ function reflectLight() {
 	array_resize(arrIncomingPackets, 0);
 }
 
-/// @ function						refractLight(_refractDirection, _refractColor);
-/// @ param	{real}	_refractColor	determines which color to refract from the others
+/// @ function							refractLight(_refractDirection, _refractColor);
+/// @ param	{real}		_refractColor	determines which color to refract from the others
+/// @ param {boolean}	_isInverted		determines where new packets are sent
 /// @ description of incoming light packets, reflects only the chosen color, allowing other light through
-function refractLight(_refractColor) {
+function refractLight(_refractColor, _isInverted) {
 	for (var i = 0; i < array_length(arrIncomingPackets); i ++) {	//for each incoming packet
 		if (containerHasColor(arrIncomingPackets[i], _refractColor)) {
 			
@@ -160,8 +161,13 @@ function refractLight(_refractColor) {
 					arrOtherLights[j] = arrIncomingPackets[i].arrLight[j];
 				}
 			}
-			createLightPacket(arrSingleLight, calculateReflectionAngle(direction, arrIncomingPackets[i].packetDirection));
-			createLightPacket(arrOtherLights, arrIncomingPackets[i].packetDirection);
+			if (!_isInverted) {
+				createLightPacket(arrSingleLight, calculateReflectionAngle(direction, arrIncomingPackets[i].packetDirection));
+				createLightPacket(arrOtherLights, arrIncomingPackets[i].packetDirection);
+			} else {
+				createLightPacket(arrSingleLight, arrIncomingPackets[i].packetDirection);
+				createLightPacket(arrOtherLights, calculateReflectionAngle(direction, arrIncomingPackets[i].packetDirection));
+			}
 		} else {
 			createLightPacket(arrIncomingPackets[i].arrLight, arrIncomingPackets[i].packetDirection);
 		}
@@ -171,18 +177,18 @@ function refractLight(_refractColor) {
 }
 
 // @ function								containerHasColor(_containerToCheck, _colorToCheck);
-/// @ param	{struct}	_containerToCheck	light packet to check
+/// @ param	{struct}	_containerToCheck	light packet/machine to check
 /// @ param	{real}		_colorToCheck		color to check for
-/// @ description returns whether given light packet has more than 0 of a given color
+/// @ description returns whether given container has more than 0 of a given color
 function containerHasColor(_containerToCheck, _colorToCheck) {
 	//print(string(id) + " checking packet for color " + string(_colorToCheck));
 	return (_containerToCheck.arrLight[_colorToCheck] > 0);
 }
 
 // @ function								containerHasSingleColor(_containerToCheck, _colorToCheck);
-/// @ param	{struct}	_containerToCheck	light packet to check
+/// @ param	{struct}	_containerToCheck	light/machine packet to check
 /// @ param	{real}		_colorToCheck		color to check for
-/// @ description returns whether given light packet has more than 0 of a given color and 0 of all other colors
+/// @ description returns whether given container has more than 0 of a given color and 0 of all other colors
 function containerHasSingleColor(_containerToCheck, _colorToCheck) {
 	//print(string(id) + " checking packet for color " + string(_colorToCheck));
 	
@@ -221,6 +227,27 @@ function calculateReflectionAngle(_mirrorAngle, _lightAngle) {
 	return newAngle;
 }
 
+/// @ function						compareColors();
+/// @ param {array}	_arrayToCheck	array of colors to check
+/// @ param	{real}	_targetRed		target red percent
+/// @ param	{real}	_targetGreen	target green percent
+/// @ param	{real}	_targetBlue		target blue percent
+/// @ description returns the percent similarity between the two colors
+function compareColors(_arrayToCheck, _targetRed, _targetGreen, _targetBlue) {
+	var brightestColorAmount = max(_arrayToCheck[lightColors.red], _arrayToCheck[lightColors.green], _arrayToCheck[lightColors.blue]);
+	
+	var redPercent = _arrayToCheck[lightColors.red] / brightestColorAmount;
+	var greenPercent = _arrayToCheck[lightColors.green] / brightestColorAmount;
+	var bluePercent = _arrayToCheck[lightColors.blue] / brightestColorAmount;
+	
+	var redSimilarity = 1 - abs(_targetRed - redPercent);	//if equal, returns 1. if nothing alike, returns 0
+	var greenSimilarity = 1 - abs(_targetGreen - greenPercent);
+	var blueSimilarity = 1 - abs(_targetBlue - bluePercent);
+	
+	var totalSimilarity = (redSimilarity + greenSimilarity + blueSimilarity) / 3;
+	return totalSimilarity;
+}
+
 /// @ function					drawLaser(_laser);
 /// @ param {struct}	_laser	laser struct to draw
 /// @ description draws a laser in a given direction until it hits something
@@ -248,7 +275,7 @@ function drawLasers() {
 }
 
 /// @ function			setLaserColorAndAlpha(_laser);
-/// @param	{struct}	_laser
+/// @ param	{struct}	_laser
 /// @ description set draw color and alpha based on light packet contents
 function setLaserColorAndAlpha(_laser) {
 	//set value of highest color to 255
@@ -263,10 +290,10 @@ function setLaserColorAndAlpha(_laser) {
 	
 	var minBrightness = 255 / 4;
 	var brightnessCeiling = 10;
-
-	var redBrightness = min(((redAmount - 1) * ((255 - minBrightness) / (brightestColorAmount - 1)) + minBrightness), 255);
-	var greenBrightness = min(((greenAmount - 1) * ((255 - minBrightness) / (brightestColorAmount - 1)) + minBrightness), 255);
-	var blueBrightness = min(((blueAmount - 1) * ((255 - minBrightness) / (brightestColorAmount - 1)) + minBrightness), 255);
+	
+	var redBrightness = lerp(minBrightness, 255, redAmount / brightestColorAmount);
+	var greenBrightness = lerp(minBrightness, 255, greenAmount / brightestColorAmount);
+	var blueBrightness = lerp(minBrightness, 255, blueAmount / brightestColorAmount);
 	
 	var alpha = min(brightestColorAmount, brightnessCeiling) / brightnessCeiling;
 	
@@ -277,8 +304,11 @@ function setLaserColorAndAlpha(_laser) {
 	draw_set_alpha(alpha);
 }
 
-function drawLightColor(color) {
-	switch color {
+/// @ function		drawLightColor(_color);
+/// @ param	{real}	_color
+/// @ description returns a color based on input value
+function drawLightColor(_color) {
+	switch _color {
 		case lightColors.red: return c_red;
 		case lightColors.green: return c_lime;
 		case lightColors.blue: return c_blue;

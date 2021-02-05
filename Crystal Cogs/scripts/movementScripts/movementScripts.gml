@@ -1,8 +1,8 @@
 /// @description moveAndCollide()
 function moveAndCollide() {
 		
-	hSpeed += hAcceleration * global.secondsPassed;
-	vSpeed += vAcceleration * global.secondsPassed;
+	hSpeed += hAcceleration;
+	vSpeed += vAcceleration;
 	hSpeed *= frictFloor;
 	vSpeed *= frictAir;
 		

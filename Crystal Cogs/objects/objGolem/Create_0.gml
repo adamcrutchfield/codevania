@@ -2,9 +2,9 @@
 
 state = golemStates.empty;
 
-moveSpeed = 60;
-jumpStrength = 780;
-grav = 40;
+moveSpeed = 1.8;
+jumpStrength = 13;
+grav = 0.7;
 
 frictFloor = 0.65;
 frictAir = 0.95;

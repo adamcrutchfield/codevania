@@ -27,7 +27,7 @@ switch state {
 		while (objSoul.bbox_left <= bbox_left) objSoul.x++;
 		while (objSoul.bbox_right >= bbox_right) objSoul.x--;
 		
-		if (y > room_height + 100) instance_destroy();
+		if (y > room_height + GRID_SIZE) instance_destroy();
 		
 		break;
 	default: break;

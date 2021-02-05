@@ -17,9 +17,11 @@ gridTargetY = round(mouse_y / 32) * 32;
 
 var machineTouching = instance_position(gridTargetX, gridTargetY, objMachine);
 var arrowTouching = instance_position(mouse_x, mouse_y, objUIArrow);
+var buttonTouching = instance_position(mouse_x, mouse_y, objUIButton);
 
 var onMachine = (machineTouching != noone);
 var onUIArrow = (arrowTouching != noone);
+var onUIButton = (buttonTouching != noone);
 
 if (lClick) {
 	//select arrow, edit machine
@@ -49,15 +51,21 @@ if (lClick) {
 				}
 			}
 		}
+	} else if (onUIButton) {
+		with (buttonTouching) {
+			isToggled = !isToggled;
+			if (machine.object_index == objRefractor) machine.isInverted = !machine.isInverted;
+		}
 	} else {
 		//select machine, spawn arrows
 		instance_destroy(objUIArrow);
-		if (onMachine) with (machineTouching) spawnSelectionArrows();
+		instance_destroy(objUIButton);
+		if (onMachine) with (machineTouching) spawnGUI();
 	}
 }
 
-
 if (onUIArrow) with (arrowTouching) isHovered = true;
+if (onUIButton) with (buttonTouching) isHovered = true;
 
 //spawn machines
 for (var i = 0; i <= 9; i++) {
@@ -71,6 +79,7 @@ for (var i = 0; i <= 9; i++) {
 			}
 		}
 		instance_destroy(objUIArrow);
+		instance_destroy(objUIButton);
 	}
 }
 
@@ -80,6 +89,7 @@ if (del) {
 		instance_destroy(machineTouching);
 	}
 	instance_destroy(objUIArrow);
+	instance_destroy(objUIButton);
 }
 
 
@@ -90,6 +100,7 @@ if (rClick) {
 		numActiveLasers = 0;
 	}
 	instance_destroy(objUIArrow);
+	instance_destroy(objUIButton);
 }
 
 if (spacebar) {

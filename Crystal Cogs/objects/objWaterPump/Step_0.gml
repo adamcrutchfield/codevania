@@ -4,15 +4,10 @@
 // Inherit the parent event
 event_inherited();
 
-//activate only if recieving 2 or more blue and none of any other color, and only if on a mineral spring
-active = (arrLight[lightColors.blue] >= 2 and position_meeting(x, y, objMineralSpring));
-if (active) {
-	for (var i = 1; i < NUM_COLORS; i++) {
-		if (i != lightColors.blue) active = (arrLight[i] == 0);
-	}
-}
+//activate only if recieving color 80+% cyan
+active = compareColors(arrLight, 0, 1, 1) >= 0.8;
 
-if (active) water+=1;	//if active, draw water
+if (active and place_meeting(x, y, objWaterfall)) water+=1;	//if active, draw water
 water = clamp(water, 0, waterMax);	//don't let water go higher than max
 
 transferWater();

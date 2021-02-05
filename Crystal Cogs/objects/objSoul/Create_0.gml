@@ -4,10 +4,10 @@ state = soulStates.free;
 
 occupiedGolem = noone;
 
-moveSpeed = 60;
+moveSpeed = 1.2;
 grav = 0;
 
-frictAir = 0.80;
+frictAir = 0.75;
 frictFloor = frictAir;
 
 hAcceleration = 0;

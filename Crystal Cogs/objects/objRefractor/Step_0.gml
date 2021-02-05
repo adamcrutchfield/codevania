@@ -4,5 +4,6 @@
 // Inherit the parent event
 event_inherited();
 
-refractLight(color);
+refractLight(color, isInverted);
+ 
 shootAllLightPackets();
