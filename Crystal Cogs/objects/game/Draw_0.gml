@@ -37,6 +37,6 @@ for (var i = 0; i < numMachines; i++) {
 		var y2 = y1 - (32 * (water / waterMax));
 		draw_line_width_color(x1, y1, x2, y2,  4, c_teal, c_teal);
 
-		draw_text(x - 16, y + 16, string(water) + "/" + string(waterMax));
+		//draw_text(x - 16, y + 16, string(water) + "/" + string(waterMax));
 	}
 }

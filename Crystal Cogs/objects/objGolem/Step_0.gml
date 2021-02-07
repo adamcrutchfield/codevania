@@ -2,7 +2,7 @@
 
 var left = keyboard_check(ord("A"));
 var right = keyboard_check(ord("D"));
-var jump = keyboard_check_pressed(vk_space);
+var keyJump = keyboard_check_pressed(vk_space);
 
 switch state {
 	case golemStates.empty:
@@ -16,8 +16,14 @@ switch state {
 	
 		hAcceleration = walkDirection * moveSpeed;
 		vAcceleration = grav;
-	
-		if (jump and place_meeting(x, y + 1, objSolid)) vAcceleration -= jumpStrength;
+		
+		if (place_meeting(x, y + 1, objSolid)) jumpBuffer = 5;
+		if (keyJump and jumpBuffer > 0) {
+			vAcceleration -= jumpStrength;
+			jumpBuffer = 0;
+		}
+		jumpBuffer--;
+		jumpBuffer = max(0, jumpBuffer);
 	
 		moveAndCollide();
 		

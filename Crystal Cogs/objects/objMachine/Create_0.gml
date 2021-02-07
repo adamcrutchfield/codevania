@@ -1,5 +1,7 @@
 /// @description init vars
 
+inventories = array_create(0, 0);
+
 initLightVars();
 initWaterVars();
 

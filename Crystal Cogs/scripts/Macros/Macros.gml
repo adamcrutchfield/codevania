@@ -31,3 +31,10 @@ enum golemStates {
 	empty,
 	hasSoul
 }
+
+enum machineSides {
+	top,
+	left,
+	right,
+	bottom
+}

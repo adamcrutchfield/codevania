@@ -1,6 +1,7 @@
 /// @description init vars
 
 state = golemStates.empty;
+jumpBuffer = 0;
 
 moveSpeed = 1.8;
 jumpStrength = 13;

@@ -257,9 +257,11 @@ function drawLaser(_laser) {
 	var y1 = _laser.startY;
 	var x2 = _laser.endX;
 	var y2 = _laser.endY;
-	var width = 5;
 	
-	setLaserColorAndAlpha(_laser);
+	draw_set_color(getLaserColor(_laser));
+	draw_set_alpha(getLaserAlpha(_laser));
+	var width = getLaserWidth(_laser);
+	
 	draw_line_width(x1, y1, x2, y2, width);
 	
 	draw_set_color(c_white);
@@ -274,34 +276,59 @@ function drawLasers() {
 	array_resize(arrDrawLasers, 0);
 }
 
-/// @ function			setLaserColorAndAlpha(_laser);
+/// @ function			getLaserColor(_laser);
 /// @ param	{struct}	_laser
-/// @ description set draw color and alpha based on light packet contents
-function setLaserColorAndAlpha(_laser) {
-	//set value of highest color to 255
-	//other colors relative to it
-	//set alpha based on amount of color
+/// @ description get laser color
+function getLaserColor(_laser) {
 	var redAmount = _laser.arrLight[lightColors.red];
 	var greenAmount = _laser.arrLight[lightColors.green];
 	var blueAmount = _laser.arrLight[lightColors.blue];
-
-	//find highest color amount
-	var brightestColorAmount = max(redAmount, greenAmount, blueAmount);
 	
+	var brightestColorAmount = max(redAmount, greenAmount, blueAmount);
 	var minBrightness = 255 / 4;
-	var brightnessCeiling = 10;
 	
 	var redBrightness = lerp(minBrightness, 255, redAmount / brightestColorAmount);
 	var greenBrightness = lerp(minBrightness, 255, greenAmount / brightestColorAmount);
 	var blueBrightness = lerp(minBrightness, 255, blueAmount / brightestColorAmount);
 	
-	var alpha = min(brightestColorAmount, brightnessCeiling) / brightnessCeiling;
+	return make_color_rgb(redBrightness, greenBrightness, blueBrightness);
+}
+
+/// @ function			getLaserAlpha(_laser);
+/// @ param	{struct}	_laser
+/// @ description get laser alpha
+function getLaserAlpha(_laser) {
 	
-	//draw_text(_laser.startX, _laser.startY, string(_laser.arrLight) + " " + string(alpha));
-	//draw_text(_laser.startX, _laser.startY + 16, string(redBrightness) + " " + string(greenBrightness) + " " + string(blueBrightness));
+	//return 1;
+		
+	var brightnessCeiling = 10;
 	
-	draw_set_color(make_color_rgb(redBrightness, greenBrightness, blueBrightness));
-	draw_set_alpha(alpha);
+	var redAmount = _laser.arrLight[lightColors.red];
+	var greenAmount = _laser.arrLight[lightColors.green];
+	var blueAmount = _laser.arrLight[lightColors.blue];
+	var totalAmount = redAmount + greenAmount + blueAmount;
+	
+	var alpha = min(totalAmount, brightnessCeiling) / brightnessCeiling;
+	return alpha;
+}
+
+/// @ function			getLaserWidth(_laser);
+/// @ param	{struct}	_laser
+/// @ description get laser width
+function getLaserWidth(_laser) {
+	
+	return 5;
+	
+	var minWidth = 1;
+	var maxWidth = 10;
+	
+	var redAmount = _laser.arrLight[lightColors.red];
+	var greenAmount = _laser.arrLight[lightColors.green];
+	var blueAmount = _laser.arrLight[lightColors.blue];
+	var avgAmount = (redAmount + greenAmount + blueAmount) / 3;
+	
+	var width = lerp(minWidth, maxWidth, min(avgAmount, maxWidth) / maxWidth);
+	return width;
 }
 
 /// @ function		drawLightColor(_color);

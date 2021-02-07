@@ -19,17 +19,13 @@ function transferWater() {
 	if (position_meeting(x, y+GRID_SIZE, objMachine)) array_set(potentialMachines, array_length(potentialMachines), instance_position(x, y+GRID_SIZE, objMachine));	//south
 	
 	//if has water to transfer and there are potential machines to send to
-	if (array_length(potentialMachines) > 0) {
-		
-		//var mostCanTransfer = min(water, maxWaterTransferRate);
-		var mostCanTransfer = min(water, maxWaterTransferRate)/* / array_length(potentialMachines)*/;
-		var amountToTransfer = 0;
-		
+	if (array_length(potentialMachines) > 0 and water > 0) {
 		for (var i = 0; i < array_length(potentialMachines); i++) {
-			amountToTransfer = min(mostCanTransfer, potentialMachines[i].waterMax - potentialMachines[i].water);
+			var amountToTransfer = min(water, maxWaterTransferRate, potentialMachines[i].waterMax - potentialMachines[i].water);
 			potentialMachines[i].water += amountToTransfer;
 			water -= amountToTransfer;
 			print(string(id) + " transferring " + string(amountToTransfer) + " water to " + string(potentialMachines[i]));
+			if water == 0 break;
 		}
 	}
 }
