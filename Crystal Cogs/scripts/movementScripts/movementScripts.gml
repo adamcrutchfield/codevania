@@ -4,7 +4,6 @@ function moveAndCollide() {
 	hSpeed += hAcceleration;
 	vSpeed += vAcceleration;
 	hSpeed *= frictFloor;
-	vSpeed *= frictAir;
 		
 	if (place_meeting(x + hSpeed, y, objSolid)) {
 		while (!place_meeting(x + sign(hSpeed), y, objSolid)) x += sign (hSpeed);
@@ -16,7 +15,9 @@ function moveAndCollide() {
 		while (!place_meeting(x, y + sign(vSpeed), objSolid)) y += sign (vSpeed);
 		vSpeed = 0;
 	}
+	vSpeed = min(vSpeed, TERMINAL_VELOCITY);
 	y += vSpeed;
 		
-	if (place_meeting(x, y, objSolid)) y--;
+	hAcceleration = 0;
+	vAcceleration = grav;
 }

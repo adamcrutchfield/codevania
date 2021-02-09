@@ -2,6 +2,7 @@
 
 #macro GRID_SIZE 32
 #macro NUM_COLORS 3
+#macro TERMINAL_VELOCITY 30
 
 enum lightColors {
 	red,

@@ -4,7 +4,7 @@
     {"id":{"name":"GUIScripts","path":"scripts/GUIScripts/GUIScripts.yy",},"order":5,},
     {"id":{"name":"objTile","path":"objects/objTile/objTile.yy",},"order":15,},
     {"id":{"name":"objMineralSpring","path":"objects/objMineralSpring/objMineralSpring.yy",},"order":11,},
-    {"id":{"name":"movementScripts","path":"scripts/movementScripts/movementScripts.yy",},"order":7,},
+    {"id":{"name":"MovementScripts","path":"scripts/MovementScripts/MovementScripts.yy",},"order":7,},
     {"id":{"name":"room1","path":"rooms/room1/room1.yy",},"order":1,},
     {"id":{"name":"DebugScripts","path":"scripts/DebugScripts/DebugScripts.yy",},"order":2,},
     {"id":{"name":"GridMove","path":"scripts/GridMove/GridMove.yy",},"order":4,},
