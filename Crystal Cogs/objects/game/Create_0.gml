@@ -4,6 +4,9 @@
 x = -32;
 y = -32;
 
+global.gridTargetX = round(mouse_x / 32) * 32;
+global.gridTargetY = round(mouse_y / 32) * 32;
+
 //custom mouse!
 window_set_cursor(cr_none);
 cursor_sprite = sprMouse;

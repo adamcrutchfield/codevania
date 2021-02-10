@@ -1,6 +1,5 @@
-/// @description init vars
-
-state = golemStates.empty;
+/// @description Insert description here
+// You can write your code in this editor
 
 moveSpeed = 1.8;
 jumpTarget = GRID_SIZE * 2.2;
@@ -16,9 +15,4 @@ vAcceleration = 0;
 hSpeed = 0;
 vSpeed = 0;
 
-/*
-//for tracking jump height
-startJump = y;
-jumpHeight = 0;
-numTicks = 0;
-*/
+arrPath = array_create(0, 0);

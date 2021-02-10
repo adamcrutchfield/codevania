@@ -12,10 +12,10 @@ for (var i = 0; i < 10; i++) numKeys[i] = keyboard_check_pressed(ord(string(i + 
 
 var del = keyboard_check_pressed(vk_delete);
 
-gridTargetX = round(mouse_x / 32) * 32;
-gridTargetY = round(mouse_y / 32) * 32;
+global.gridTargetX = round(mouse_x / GRID_SIZE) * GRID_SIZE;
+global.gridTargetY = round(mouse_y / GRID_SIZE) * GRID_SIZE;
 
-var machineTouching = instance_position(gridTargetX, gridTargetY, objMachine);
+var machineTouching = instance_position(global.gridTargetX, global.gridTargetY, objMachine);
 var arrowTouching = instance_position(mouse_x, mouse_y, objUIArrow);
 var buttonTouching = instance_position(mouse_x, mouse_y, objUIButton);
 
@@ -71,7 +71,7 @@ if (onUIButton) with (buttonTouching) isHovered = true;
 for (var i = 0; i <= 9; i++) {
 	if (numKeys[i]) {
 		if (!onMachine and i < array_length(arrMachinesGUI)) {
-			instance_create_layer(gridTargetX, gridTargetY, "Machines", arrMachinesGUI[i]);
+			instance_create_layer(global.gridTargetX, global.gridTargetY, "Machines", arrMachinesGUI[i]);
 		} else {
 			if ( onMachine and machineTouching.object_index == objRefractor and i < NUM_COLORS) {
 				//change color of refractor

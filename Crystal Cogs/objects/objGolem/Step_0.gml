@@ -21,8 +21,8 @@ switch state {
 			vAcceleration -= jumpStrength;
 			jumpBuffer = 0;
 			
-			startJump = y;
-			jumpHeight = 0;
+			//startJump = y;
+			//jumpHeight = 0;
 			//numTicks = 0;
 		}
 		jumpBuffer--;
