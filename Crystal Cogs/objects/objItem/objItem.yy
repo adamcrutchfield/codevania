@@ -5,7 +5,10 @@
   },
   "solid": false,
   "visible": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "sprWaterfall",
+    "path": "sprites/sprWaterfall/sprWaterfall.yy",
+  },
   "persistent": false,
   "parentObjectId": {
     "name": "objEntity",

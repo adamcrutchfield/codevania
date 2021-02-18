@@ -19,6 +19,21 @@ cursor_sprite = sprMouse;
 //create laser drawer
 instance_create_layer(x, y, "Lasers", laserDrawer);
 
+//localized item names
+global.localizedItemNames = array_create(NUM_ITEMS);
+global.localizedItemNames[items.crystal] = "Crystal";
+global.localizedItemNames[items.crystalFragment] = "Crystal Fragment";
+global.localizedItemNames[items.machine] = "Machine";
+global.localizedItemNames[items.wood] = "Wood";
+global.localizedItemNames[items.stone] = "Stone";
+global.localizedItemNames[items.iron] = "Iron";
+global.localizedItemNames[items.gold] = "Gold";
+global.localizedItemNames[items.platinum] = "Platinum";
+global.localizedItemNames[items.golemTorso] = "Golem Torso";
+global.localizedItemNames[items.golemArms] = "Golem Arms";
+global.localizedItemNames[items.golemHead] = "Golem Head";
+global.localizedItemNames[items.golemLegs] = "Golem Legs";
+
 //temporary ui for spawning machines
 arrMachinesGUI = array_create(0);
 array_set(arrMachinesGUI, 0, objCrystal);

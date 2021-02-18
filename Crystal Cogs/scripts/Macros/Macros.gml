@@ -1,4 +1,4 @@
-/// initialize macros, enums, and global vars
+/// initialize macros, enums
 
 #macro GRID_SIZE 32
 #macro NUM_COLORS 3
@@ -33,9 +33,37 @@ enum golemStates {
 	hasSoul
 }
 
+/*
 enum machineSides {
 	top,
 	left,
 	right,
 	bottom
+}
+*/
+
+#macro NUM_ITEMS 12
+
+enum items {
+	crystal,
+	crystalFragment,
+	machine,
+	wood,
+	stone,
+	iron,
+	gold,
+	platinum,
+	golemTorso,
+	golemArms,
+	golemHead,
+	golemLegs
+}
+
+enum golemMaterials {
+	crystal,
+	wood,
+	stone,
+	iron,
+	gold,
+	platinum
 }

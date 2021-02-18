@@ -24,7 +24,7 @@ function transferWater() {
 			var amountToTransfer = min(water, maxWaterTransferRate, potentialMachines[i].waterMax - potentialMachines[i].water);
 			potentialMachines[i].water += amountToTransfer;
 			water -= amountToTransfer;
-			print(string(id) + " transferring " + string(amountToTransfer) + " water to " + string(potentialMachines[i]));
+			//print(string(id) + " transferring " + string(amountToTransfer) + " water to " + string(potentialMachines[i]));
 			if water == 0 break;
 		}
 	}

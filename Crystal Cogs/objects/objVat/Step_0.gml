@@ -2,37 +2,55 @@
 
 event_inherited();
 
-active = (water > 10 and containerLightAmount(id) >= 9);
+
+active = (water >= waterPerOperation and containerLightAmount(id) >= 9 and slotIsClear(inventories[1].arrItems[0]));
+
+if (!hasCrystal) {
+	
+}
 
 //when supplied with sufficient minerals and light, consume minerals and progress
 if active {
-	if (countdown <= 0) {
+	if (countdown > 0) {
+		countdown--;
+	} else {
 		countdown = ticksPerOperation;
-	
-		water -= 10;
 		
-		crystalRed += arrLight[lightColors.red];
-		crystalGreen += arrLight[lightColors.green];
-		crystalBlue += arrLight[lightColors.blue];
+		if (crystalProgress < growthComplete) {	//grow crystal
+			crystalProgress++;
+			
+			water -= waterPerOperation;
+			
+			var brightestColorAmount = max(arrLight[lightColors.red], arrLight[lightColors.green], arrLight[lightColors.blue]);
 	
-		//when crystal growth is complete
-		if (progress >= 100) {
-						
+			var redPercent = arrLight[lightColors.red] / brightestColorAmount;
+			var greenPercent = arrLight[lightColors.green] / brightestColorAmount;
+			var bluePercent = arrLight[lightColors.blue] / brightestColorAmount;
+			
+			crystalRed = lerp(crystalRed, redPercent*255, crystalProgress/growthComplete);
+			crystalGreen = lerp(crystalGreen, greenPercent*255, crystalProgress/growthComplete);
+			crystalBlue = lerp(crystalBlue, bluePercent*255, crystalProgress/growthComplete);
+			
+		} else {	//when crystal growth is complete, create crystal item
+			crystalProgress = 0;
+			
 			var crystalColors = {
 				red : crystalRed,
 				green : crystalGreen,
 				blue : crystalBlue
 			}
-			addItem(crystalSlot, createItem("Raw Crystal", crystalColors));
+			
+			inventories[1] = inventoryWithNewItem(inventories[1], createItem(items.crystal, crystalColors, 1));
+			dropItem(inventories[1].arrItems[0], x, y-GRID_SIZE);
+			inventories[1].arrItems[0] = {};
+			//dropItem(createItem(items.crystal, crystalColors, 1), x, y-GRID_SIZE);
 			
 			crystalRed = 0;
 			crystalGreen = 0;
 			crystalBlue = 0;
 			
-			progress = 0;
 		}
-	
-	} else countdown--;
+	}
 	countdown = max(0, countdown);	
 }
 

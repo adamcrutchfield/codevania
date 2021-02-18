@@ -6,16 +6,30 @@ event_inherited();
 
 localizedName = "Crystal Growth Vat";
 
+image_speed = 0;
+
 waterMax = 100;
 
-array_push(inventories, createInventory(1, false));
-crystalSlot = inventories[0];
+array_push(inventories, createInventory(1, true, false));
+array_push(inventories, createInventory(1, false, true));
+inputInv = inventories[0];
+outputInv = inventories[1];
+inputSlot = inputInv.arrItems[0];
+outputSlot = outputInv.arrItems[0];
 
-crystalRed = 0;
-crystalGreen = 0;
-crystalBlue = 0;
+print("output slot: " + string(outputSlot))
+
+hasCrystal = false;
+
+crystalRed = 255;
+crystalGreen = 255;
+crystalBlue = 255;
 
 ticksPerOperation = 30;
 countdown = 0;
+active = false;
 
-progress = 0;
+growthComplete = 3;
+crystalProgress = 0;
+
+waterPerOperation = 10;

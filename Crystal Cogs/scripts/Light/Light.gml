@@ -250,6 +250,29 @@ function compareColors(_arrayToCheck, _targetRed, _targetGreen, _targetBlue) {
 	return totalSimilarity;
 }
 
+/// @ description returns the closest of 7 colors
+function getClosestColor(_arrayToCheck) {
+	
+	var redPercent = compareColors(_arrayToCheck, 1, 0, 0);
+	var closestColor = "red";
+	var greenPercent = compareColors(_arrayToCheck, 0, 1, 0);
+	if (greenPercent > redPercent) closestColor = "green";
+	var bluePercent = compareColors(_arrayToCheck, 0, 0, 1);
+	if (bluePercent > greenPercent) closestColor = "blue";
+	
+	var cyanPercent = compareColors(_arrayToCheck, 0, 1, 1);
+	if (cyanPercent > bluePercent) closestColor = "cyan";
+	var magentaPercent = compareColors(_arrayToCheck, 1, 0, 1);
+	if (magentaPercent > cyanPercent) closestColor = "magenta";
+	var yellowPercent = compareColors(_arrayToCheck, 1, 1, 0);
+	if (yellowPercent > magentaPercent) closestColor = "yellow";
+	
+	var whitePercent = compareColors(_arrayToCheck, 1, 1, 1);
+	if (whitePercent > yellowPercent) closestColor = "white";
+	
+	return closestColor;
+}
+
 /// @ function					drawLaser(_laser);
 /// @ param {struct}	_laser	laser struct to draw
 /// @ description draws a laser in a given direction until it hits something

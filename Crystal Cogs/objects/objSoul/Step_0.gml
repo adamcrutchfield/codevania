@@ -62,7 +62,7 @@ switch state {
 	case soulStates.exitingGolem:
 		
 		//move up
-		vAcceleration = -10;
+		vAcceleration = -20;
 		moveAndCollide();
 		
 		//change states
