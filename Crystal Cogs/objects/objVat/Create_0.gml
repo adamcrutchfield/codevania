@@ -10,12 +10,12 @@ image_speed = 0;
 
 waterMax = 100;
 
-array_push(inventories, createInventory(1, true, false));
-array_push(inventories, createInventory(1, false, true));
+array_push(inventories, new MachineInventory(1, true, false));
+array_push(inventories, new MachineInventory(1, false, true));
 inputInv = inventories[0];
 outputInv = inventories[1];
-inputSlot = inputInv.arrItems[0];
-outputSlot = outputInv.arrItems[0];
+inputSlot = inputInv.items[| 0];
+outputSlot = outputInv.items[| 0];
 
 print("output slot: " + string(outputSlot))
 

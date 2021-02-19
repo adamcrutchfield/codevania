@@ -3,7 +3,7 @@
 event_inherited();
 
 
-active = (water >= waterPerOperation and containerLightAmount(id) >= 9 and slotIsClear(inventories[1].arrItems[0]));
+active = (water >= waterPerOperation and containerLightAmount(id) >= 9 and instanceof(outputSlot) == undefined);
 
 if (!hasCrystal) {
 	
@@ -34,6 +34,12 @@ if active {
 		} else {	//when crystal growth is complete, create crystal item
 			crystalProgress = 0;
 			
+			outputSlot = new SCrystal(crystalRed, crystalGreen, crystalBlue, 1);
+			print("made new item " + string(outputSlot));
+			outputSlot.dropItem(x, y - GRID_SIZE);
+			outputSlot = undefined;
+			
+			/*
 			var crystalColors = {
 				red : crystalRed,
 				green : crystalGreen,
@@ -43,8 +49,7 @@ if active {
 			inventories[1] = inventoryWithNewItem(inventories[1], createItem(items.crystal, crystalColors, 1));
 			dropItem(inventories[1].arrItems[0], x, y-GRID_SIZE);
 			inventories[1].arrItems[0] = {};
-			//dropItem(createItem(items.crystal, crystalColors, 1), x, y-GRID_SIZE);
-			
+			*/
 			crystalRed = 0;
 			crystalGreen = 0;
 			crystalBlue = 0;

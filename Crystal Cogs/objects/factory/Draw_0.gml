@@ -2,8 +2,8 @@
 // You can write your code in this editor
 
 //show target grid tile
-var x1 = global.gridTargetX - GRID_SIZE / 2;
-var y1 = global.gridTargetY - GRID_SIZE / 2;
+var x1 = mouseGridX - GRID_SIZE / 2;
+var y1 = mouseGridY - GRID_SIZE / 2;
 var x2 = x1 + GRID_SIZE - 1;
 var y2 = y1 + GRID_SIZE - 1;
 

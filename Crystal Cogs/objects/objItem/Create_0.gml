@@ -11,6 +11,6 @@ vAcceleration = -random(jumpStrengthFromTarget(jumpTarget, grav));
 
 item = {};
 
-image_xscale = 0.5;
-image_yscale = 0.5;
+image_xscale = 0.75;
+image_yscale = 0.75;
 image_speed = 0;

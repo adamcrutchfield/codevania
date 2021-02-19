@@ -42,23 +42,6 @@ enum machineSides {
 }
 */
 
-#macro NUM_ITEMS 12
-
-enum items {
-	crystal,
-	crystalFragment,
-	machine,
-	wood,
-	stone,
-	iron,
-	gold,
-	platinum,
-	golemTorso,
-	golemArms,
-	golemHead,
-	golemLegs
-}
-
 enum golemMaterials {
 	crystal,
 	wood,
