@@ -27,7 +27,6 @@ crystalBlue = 255;
 
 ticksPerOperation = 30;
 countdown = 0;
-active = false;
 
 growthComplete = 3;
 crystalProgress = 0;

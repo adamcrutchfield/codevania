@@ -6,7 +6,7 @@ var lClick = mouse_check_button_pressed(mb_left);
 var rClick = mouse_check_button_pressed(mb_right);
 var del = keyboard_check_pressed(vk_delete);
 var numKeys = array_create(10, false);
-for (var i = 0; i < 10; i++) numKeys[i] = keyboard_check_pressed(ord(string(i + 1)));
+for (var i = 0; i <= 9; i++) numKeys[i] = keyboard_check_pressed(ord(string(i + 1)));
 
 mouseGridX = round(mouse_x / GRID_SIZE) * GRID_SIZE;
 mouseGridY = round(mouse_y / GRID_SIZE) * GRID_SIZE;
@@ -65,15 +65,14 @@ if (lClick) {
 if (onUIArrow) with (arrowTouching) isHovered = true;
 if (onUIButton) with (buttonTouching) isHovered = true;
 
-//spawn machines
 for (var i = 0; i <= 9; i++) {
 	if (numKeys[i]) {
+		//spawn machines
 		if (!onSolid and i < array_length(arrMachinesGUI)) {
 			instance_create_layer(mouseGridX, mouseGridY, "Machines", arrMachinesGUI[i]);
 			onSolid = true;
-		} else {
+		} else {	//change color of refractor
 			if ( onMachine and machineTouching.object_index == objRefractor and i < NUM_COLORS) {
-				//change color of refractor
 				with machineTouching color = i;
 			}
 		}
@@ -90,7 +89,6 @@ if (del) {
 	instance_destroy(objUIArrow);
 	instance_destroy(objUIButton);
 }
-
 
 //deactivate lasers on target machine
 if (rClick) {

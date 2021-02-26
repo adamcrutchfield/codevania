@@ -36,20 +36,8 @@ if active {
 			
 			outputSlot = new SCrystal(crystalRed, crystalGreen, crystalBlue, 1);
 			print("made new item " + string(outputSlot));
-			outputSlot.dropItem(x, y - GRID_SIZE);
-			outputSlot = undefined;
-			
-			/*
-			var crystalColors = {
-				red : crystalRed,
-				green : crystalGreen,
-				blue : crystalBlue
-			}
-			
-			inventories[1] = inventoryWithNewItem(inventories[1], createItem(items.crystal, crystalColors, 1));
-			dropItem(inventories[1].arrItems[0], x, y-GRID_SIZE);
-			inventories[1].arrItems[0] = {};
-			*/
+			outputSlot = outputSlot.dropItem(x, y - GRID_SIZE);
+
 			crystalRed = 0;
 			crystalGreen = 0;
 			crystalBlue = 0;

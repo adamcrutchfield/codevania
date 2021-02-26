@@ -1,4 +1,4 @@
-/// @ function		approach(_value, _target, _amount)
+/// @ function		approach(_value, _target, _amount);
 /// @ param {real}	_value
 /// @ param {real}	_target
 /// @ param {real}	_amount
@@ -18,4 +18,16 @@ function approach(_value, _target, _amount){
 /// @param	{string}	_input
 function print(_input) {
 	show_debug_message(_input);
+}
+
+/// @ description returns a value that waves bedtween two points
+function wave(from, to, duration, offset) {
+	var a4 = (to - from) * 0.5;
+	return from + a4 + sin((((current_time * 0.001) + duration * offset) / duration) * (pi/2)) * a4;
+}
+
+/// @ description returns a value that waves bedtween two points, relative to age
+function waveAge(from, to, duration, offset, age) {
+	var a4 = (to - from) * 0.5;
+	return from + a4 + sin((((age * 0.1) + duration * offset) / duration) * (pi/2)) * a4;
 }

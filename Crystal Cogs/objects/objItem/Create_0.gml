@@ -3,6 +3,8 @@
 
 event_inherited();
 
+age = 0;
+
 jumpTarget = GRID_SIZE/2;
 moveSpeed = 18;
 

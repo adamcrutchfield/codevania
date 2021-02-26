@@ -1,5 +1,5 @@
 
-#region item parents
+#region item abstracts
 function IItem() constructor {
 	name = "";
 	sprite = undefined;
@@ -130,7 +130,7 @@ global.items[Item.crystalGolemHead] = new ICrystalGolemHead();
 global.items[Item.crystalGolemLegs] = new ICrystalGolemLegs();
 #endregion
 
-#region item stack parents
+#region item stack abstracts
 function SItem(_count) constructor {
 	count = _count;
 	
@@ -139,6 +139,7 @@ function SItem(_count) constructor {
 			item = other;
 			sprite_index = other.sprite;
 		}
+		return undefined;
 	}
 	
 	static getItemRGB = function() {
