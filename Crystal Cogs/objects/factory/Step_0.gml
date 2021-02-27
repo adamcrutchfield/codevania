@@ -5,6 +5,8 @@
 var lClick = mouse_check_button_pressed(mb_left);
 var rClick = mouse_check_button_pressed(mb_right);
 var del = keyboard_check_pressed(vk_delete);
+var insert = keyboard_check_pressed(vk_insert);
+
 var numKeys = array_create(10, false);
 for (var i = 0; i <= 9; i++) numKeys[i] = keyboard_check_pressed(ord(string(i + 1)));
 
@@ -67,15 +69,19 @@ if (onUIButton) with (buttonTouching) isHovered = true;
 
 for (var i = 0; i <= 9; i++) {
 	if (numKeys[i]) {
-		//spawn machines
-		if (!onSolid and i < array_length(arrMachinesGUI)) {
-			instance_create_layer(mouseGridX, mouseGridY, "Machines", arrMachinesGUI[i]);
-			onSolid = true;
-		} else {	//change color of refractor
-			if ( onMachine and machineTouching.object_index == objRefractor and i < NUM_COLORS) {
-				with machineTouching color = i;
+		if (onMachine) {
+			//chang color or refractor
+			if (machineTouching.object_index == objRefractor and i < NUM_COLORS) {
+				machineTouching.color = i;
+			}
+		} else {
+			//spawn machine
+			if (i < array_length(arrMachinesGUI)) {
+				instance_create_layer(mouseGridX, mouseGridY, "Machines", arrMachinesGUI[i]);
+				break;
 			}
 		}
+		
 		instance_destroy(objUIArrow);
 		instance_destroy(objUIButton);
 	}
@@ -98,4 +104,18 @@ if (rClick) {
 	}
 	instance_destroy(objUIArrow);
 	instance_destroy(objUIButton);
+}
+
+//add item to factory inventory
+if (insert) {
+	inventory.addItem(new SWood(ceil(random(200))));
+}
+
+//if soul touching an item
+with (objSoul) {
+	if place_meeting(x, y, objItem) {
+		var itemTouching = instance_place(x, y, objItem);
+		factory.inventory.addItem(itemTouching.item);
+		instance_destroy(itemTouching);
+	}
 }

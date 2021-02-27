@@ -4,11 +4,19 @@
 inventory = new Inventory(30);
 mouseItem = {};
 
-inventory.addItem(new SCrystal(255, 150, 0,  2));
-inventory.addItem( new SWood(1));
+inventory.addItem(new SCrystal(255, 255, 0,  2));
+inventory.addItem(new SWood(1));
 inventory.addItem(new SIron(22));
 inventory.addItem(new SWood(3));
 inventory.addItem(new SGold(2));
+inventory.addItem(new SCrystalGolemHead(0, 255, 0, 0, 1));
+inventory.addItem(new SGolemHead(0, golemMaterials.stone, 1));
+inventory.addItem(new SCrystalGolemTorso(0, 255, 0, 0, 1));
+inventory.addItem(new SGolemTorso(0, golemMaterials.wood, 1));
+inventory.addItem(new SCrystalGolemArm(0, 255, 0, 255, 1));
+inventory.addItem(new SGolemArm(0, golemMaterials.iron, 1));
+inventory.addItem(new SCrystalGolemLegs(0, 255, 0, 255, 1));
+inventory.addItem(new SGolemLegs(0, golemMaterials.gold, 1));
 
 mouseGridX = round(mouse_x / GRID_SIZE) * GRID_SIZE;
 mouseGridY = round(mouse_y / GRID_SIZE) * GRID_SIZE;

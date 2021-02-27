@@ -17,8 +17,6 @@ outputInv = inventories[1];
 inputSlot = inputInv.items[| 0];
 outputSlot = outputInv.items[| 0];
 
-print("output slot: " + string(outputSlot))
-
 hasCrystal = false;
 
 crystalRed = 255;

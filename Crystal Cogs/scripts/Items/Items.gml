@@ -3,7 +3,7 @@
 function IItem() constructor {
 	name = "";
 	sprite = undefined;
-	stackSize = 100;
+	maxStackSize = 100;
 }
 function IColoredItem() : IItem() constructor {
 	red = 255;
@@ -46,7 +46,7 @@ function IPlatinum() : IItem() constructor {
 
 #region golem parts
 function IGolemPart() : IItem() constructor {
-	stackSize = 1;
+	maxStackSize = 1;
 	material = undefined;
 }
 function ICrystalGolemPart() : IGolemPart() constructor {
@@ -133,6 +133,7 @@ global.items[Item.crystalGolemLegs] = new ICrystalGolemLegs();
 #region item stack abstracts
 function SItem(_count) constructor {
 	count = _count;
+	maxStackSize = new IItem().maxStackSize;
 	
 	static dropItem = function(_x, _y) {
 		with instance_create_layer(_x, _y, "Entities", objItem) {
@@ -153,11 +154,23 @@ function SItem(_count) constructor {
 
 		return make_color_rgb(_red, _green, _blue);
 	}
+	
+	compareStack = function(_item) {
+		return (instanceof(_item) == instanceof(self));
+	}
 }
 function SColoredItem(_red, _green, _blue, _count) : SItem(_count) constructor {
 	red = _red;
 	green = _green;
 	blue = _blue;
+	
+	compareStack = function(_item) {
+		if (instanceof(_item) != instanceof(self)) return false;
+		if (variable_struct_exists(_item, "red") and _item.red != red) return false;
+		if (variable_struct_exists(_item, "green") and _item.green != green) return false;
+		if (variable_struct_exists(_item, "blue") and _item.blue != blue) return false;
+		return true;
+	}
 }
 #endregion
 
@@ -196,6 +209,7 @@ function SPlatinum(_count) : SItem(_count) constructor {
 function SGolemPart(_shape, _material, _count) : SItem(_count) constructor {
 	shape = _shape;
 	material = _material;
+	//maxStackSize = new IGolemPart().maxStackSize;
 }
 function SCrystalGolemPart(_shape, _red, _green, _blue, _count) : SGolemPart(_shape, golemMaterials.crystal, _count) constructor {
 	red = _red;

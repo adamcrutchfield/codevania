@@ -11,9 +11,6 @@ draw_set_color(c_black);
 draw_rectangle(x1, y1, x2, y2, true);
 draw_set_color(c_white);
 
-//draw cursor
-//draw_sprite(sprMouse, 0, mouse_x, mouse_y);
-
 //display machines' stored light and water
 var numMachines = instance_number(objMachine);
 for (var i = 0; i < numMachines; i++) {

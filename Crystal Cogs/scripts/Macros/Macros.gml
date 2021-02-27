@@ -33,15 +33,6 @@ enum golemStates {
 	hasSoul
 }
 
-/*
-enum machineSides {
-	top,
-	left,
-	right,
-	bottom
-}
-*/
-
 enum golemMaterials {
 	crystal,
 	wood,

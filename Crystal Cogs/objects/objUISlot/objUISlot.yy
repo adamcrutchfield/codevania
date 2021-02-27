@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "sprSlot",
+    "path": "sprites/sprSlot/sprSlot.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
@@ -17,18 +20,15 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"objMachine","path":"objects/objMachine/objMachine.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"objMachine","path":"objects/objMachine/objMachine.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-  ],
+  "eventList": [],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Machines",
-    "path": "folders/Objects/Machines.yy",
+    "name": "UI",
+    "path": "folders/Objects/UI.yy",
   },
   "resourceVersion": "1.0",
-  "name": "objMachine",
+  "name": "objUISlot",
   "tags": [],
   "resourceType": "GMObject",
 }
